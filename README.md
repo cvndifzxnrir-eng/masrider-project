@@ -2,44 +2,21 @@
 
 ระบบจัดการข้อมูลมาสไรเดอร์ทุกยุคสมัย พัฒนาด้วย **Django + PostgreSQL** พร้อม Deploy บน **Render.com**
 
----
-
-##  ฟีเจอร์หลัก
-
--  เพิ่ม / แก้ไข / ลบ / แสดงข้อมูลมาสไรเดอร์
--  บันทึกความสามารถพิเศษ พร้อม Power Level
--  บันทึกประวัติการต่อสู้ (ชนะ/แพ้/เสมอ)
--  ค้นหาและกรองตามยุค (โชวะ / เฮเซ / เรวะ)
--  Form Validation ป้องกันข้อมูลผิดพลาด
--  รองรับ PostgreSQL บน Render.com
 
 
+  ฟีเจอร์หลัก
 
-| ฟิลด์ | ค่า |
-|-------|-----|
-| **Name** | masrider-app |
-| **Runtime** | Python 3 |
-| **Build Command** | `./build.sh` |
-| **Start Command** | `gunicorn masrider_project.wsgi:application` |
+ เพิ่ม / แก้ไข / ลบ / แสดงข้อมูลมาสไรเดอร์
+ บันทึกความสามารถพิเศษ พร้อม Power Level
+  บันทึกประวัติการต่อสู้ (ชนะ/แพ้/เสมอ)
+  ค้นหาและกรองตามยุค (โชวะ / เฮเซ / เรวะ)
+  Form Validation ป้องกันข้อมูลผิดพลาด
+  รองรับ PostgreSQL บน Render.com
 
 
 
-| Key | Value |
-|-----|-------|
-| `SECRET_KEY` | (กด Generate) |
-| `DEBUG` | `False` |
-| `DATABASE_URL` | (วาง Internal Database URL) |
 
 
-
- ขั้นตอนที่ 4: สร้าง Admin User บน Render
-
-ใน Render Dashboard → Shell:
-```bash
-python manage.py createsuperuser
-```
-
----
 
 
 
@@ -64,11 +41,9 @@ masrider-project/
 └── manage.py
 ```
 
----
 
- Database Schema
 
-### MasRider
+ MasRider
 | ฟิลด์ | ประเภท | คำอธิบาย |
 |-------|--------|----------|
 | name | CharField | ชื่อจริง |
@@ -80,7 +55,7 @@ masrider-project/
 | abilities | TextField | ความสามารถ |
 | bio | TextField | ประวัติ |
 
-### CompetitionHistory
+CompetitionHistory
 | ฟิลด์ | ประเภท | คำอธิบาย |
 |-------|--------|----------|
 | rider | ForeignKey | มาสไรเดอร์ |
@@ -89,7 +64,7 @@ masrider-project/
 | event_date | DateField | วันที่ |
 | result | CharField | ผล (win/lose/draw) |
 
-### Ability
+ Ability
 | ฟิลด์ | ประเภท | คำอธิบาย |
 |-------|--------|----------|
 | rider | ForeignKey | มาสไรเดอร์ |
