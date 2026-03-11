@@ -1,0 +1,80 @@
+[
+  {
+    "model": "masrider.masrider",
+    "pk": 1,
+    "fields": {
+      "name": "Takeshi Hongo",
+      "alias": "Kamen Rider 1",
+      "age": 25,
+      "series": "showa",
+      "organization": "Shocker (เดิม) / Kamen Rider",
+      "transformation_device": "Typhoon Belt",
+      "abilities": "Rider Kick, Rider Punch, ความเร็วสูง, พลังจักรกล",
+      "bio": "มาสไรเดอร์คนแรก! Takeshi Hongo เป็นนักวิทยาศาสตร์ผู้ถูก Shocker จับตัวและดัดแปลงร่างกาย แต่สามารถหลบหนีได้ก่อนการล้างสมอง",
+      "image_url": "",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "masrider.masrider",
+    "pk": 2,
+    "fields": {
+      "name": "Hayato Ichimonji",
+      "alias": "Kamen Rider 2",
+      "age": 24,
+      "series": "showa",
+      "organization": "Shocker (เดิม) / Kamen Rider",
+      "transformation_device": "Typhoon Belt",
+      "abilities": "Rider Kick, Rider Punch, กระโดดสูง",
+      "bio": "มาสไรเดอร์คนที่สอง ถูก Shocker จับตัวพร้อมกัน แต่ถูก Rider 1 ช่วยไว้",
+      "image_url": "",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "masrider.masrider",
+    "pk": 3,
+    "fields": {
+      "name": "Sougo Tokiwa",
+      "alias": "Kamen Rider Zi-O",
+      "age": 18,
+      "series": "reiwa",
+      "organization": "Zi-O",
+      "transformation_device": "Ziku-Driver",
+      "abilities": "Time Travel, Armor Time, ดูดซับพลังจากมาสไรเดอร์อื่น",
+      "bio": "ราชาแห่งกาลเวลา Sougo Tokiwa เดินทางข้ามเวลาเพื่อรวบรวมพลังของมาสไรเดอร์ทุกคน",
+      "image_url": "",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "masrider.ability",
+    "pk": 1,
+    "fields": { "rider": 1, "name": "Rider Kick", "description": "การเตะด้วยพลังจักรกลสูงสุด", "power_level": 95 }
+  },
+  {
+    "model": "masrider.ability",
+    "pk": 2,
+    "fields": { "rider": 1, "name": "Typhoon Belt", "description": "แปลงพลังลมเป็นพลังงาน", "power_level": 80 }
+  },
+  {
+    "model": "masrider.ability",
+    "pk": 3,
+    "fields": { "rider": 3, "name": "Time Travel", "description": "เดินทางข้ามเวลาได้อิสระ", "power_level": 100 }
+  },
+  {
+    "model": "masrider.competitionhistory",
+    "pk": 1,
+    "fields": {
+      "rider": 1,
+      "opponent": "Shocker General",
+      "event_name": "ศึกโชเกอร์",
+      "event_date": "1971-04-03",
+      "result": "win",
+      "description": "การต่อสู้ครั้งแรกของมาสไรเดอร์"
+    }
+  }
+]

@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: masrider-app
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn masrider_project.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: masrider-db
+          property: connectionString
+
+databases:
+  - name: masrider-db
+    databaseName: masrider
+    user: masrider_user

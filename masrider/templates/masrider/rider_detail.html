@@ -1,0 +1,122 @@
+{% extends 'masrider/base.html' %}
+{% block title %}{{ rider }} — รายละเอียด{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'rider_list' %}" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> กลับ
+    </a>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card p-4 text-center">
+            <div class="rider-avatar mx-auto mb-3" style="width:100px;height:100px;font-size:3rem;">
+                {{ rider.alias|first|default:rider.name|first }}
+            </div>
+            <h4 class="fw-bold">{{ rider.alias|default:rider.name }}</h4>
+            <p class="text-muted">{{ rider.name }}</p>
+            <span class="badge badge-{{ rider.series }} text-white fs-6 px-3 py-2 mb-3">{{ rider.get_series_display }}</span>
+
+            {% if rider.age %}<p class="mb-1"><i class="bi bi-person me-1"></i><strong>อายุ:</strong> {{ rider.age }} ปี</p>{% endif %}
+            {% if rider.organization %}<p class="mb-1"><i class="bi bi-building me-1"></i><strong>องค์กร:</strong> {{ rider.organization }}</p>{% endif %}
+            {% if rider.transformation_device %}<p class="mb-1"><i class="bi bi-gear me-1"></i><strong>อุปกรณ์แปลงร่าง:</strong> {{ rider.transformation_device }}</p>{% endif %}
+
+            <div class="d-grid gap-2 mt-3">
+                <a href="{% url 'rider_update' rider.pk %}" class="btn btn-outline-primary">
+                    <i class="bi bi-pencil"></i> แก้ไขข้อมูล
+                </a>
+                <a href="{% url 'rider_delete' rider.pk %}" class="btn btn-outline-danger">
+                    <i class="bi bi-trash"></i> ลบข้อมูล
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        {% if rider.bio %}
+        <div class="card p-4 mb-4">
+            <h5 class="fw-bold mb-2"><i class="bi bi-journal-text text-danger me-2"></i>ประวัติ</h5>
+            <p class="mb-0">{{ rider.bio }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Abilities -->
+        <div class="card p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0"><i class="bi bi-lightning-fill text-warning me-2"></i>ความสามารถพิเศษ</h5>
+                <a href="{% url 'ability_add' rider.pk %}" class="btn btn-sm btn-warning text-dark">
+                    <i class="bi bi-plus"></i> เพิ่ม
+                </a>
+            </div>
+            {% if abilities %}
+                {% for ability in abilities %}
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <strong>{{ ability.name }}</strong>
+                        <small class="text-muted">พลัง {{ ability.power_level }}/100</small>
+                    </div>
+                    <div class="progress my-1" style="height:8px;">
+                        <div class="progress-bar power-bar" style="width:{{ ability.power_level }}%"></div>
+                    </div>
+                    {% if ability.description %}<small class="text-muted">{{ ability.description }}</small>{% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted mb-0">ยังไม่มีข้อมูลความสามารถ</p>
+            {% endif %}
+        </div>
+
+        <!-- Competition History -->
+        <div class="card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0"><i class="bi bi-trophy-fill text-success me-2"></i>ประวัติการต่อสู้</h5>
+                <div>
+                    <span class="badge bg-success me-1">ชนะ {{ wins }}</span>
+                    <span class="badge bg-danger me-1">แพ้ {{ losses }}</span>
+                    <span class="badge bg-secondary me-2">เสมอ {{ draws }}</span>
+                    <a href="{% url 'competition_add' rider.pk %}" class="btn btn-sm btn-success">
+                        <i class="bi bi-plus"></i> เพิ่ม
+                    </a>
+                </div>
+            </div>
+            {% if competitions %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>เหตุการณ์</th>
+                            <th>คู่ต่อสู้</th>
+                            <th>วันที่</th>
+                            <th>ผล</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comp in competitions %}
+                        <tr>
+                            <td>{{ comp.event_name }}</td>
+                            <td>{{ comp.opponent }}</td>
+                            <td>{{ comp.event_date }}</td>
+                            <td>
+                                {% if comp.result == 'win' %}<span class="badge bg-success">ชนะ</span>
+                                {% elif comp.result == 'lose' %}<span class="badge bg-danger">แพ้</span>
+                                {% else %}<span class="badge bg-secondary">เสมอ</span>{% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'competition_delete' comp.pk %}" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <p class="text-muted mb-0">ยังไม่มีประวัติการต่อสู้</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
