@@ -13,65 +13,7 @@
 -  Form Validation ป้องกันข้อมูลผิดพลาด
 -  รองรับ PostgreSQL บน Render.com
 
----
 
-## 🛠️ การติดตั้งบนเครื่อง (Local Development)
-
-```bash
-# 1. Clone โปรเจค
-git clone https://github.com/YOUR_USERNAME/masrider-project.git
-cd masrider-project
-
-# 2. สร้าง Virtual Environment
-python -m venv venv
-source venv/bin/activate        # Mac/Linux
-venv\Scripts\activate           # Windows
-
-# 3. ติดตั้ง Dependencies
-pip install -r requirements.txt
-
-# 4. รัน Migrations
-python manage.py migrate
-
-# 5. (ตัวเลือก) โหลดข้อมูลตัวอย่าง
-python manage.py loaddata masrider/fixtures/sample_data.json
-
-# 6. สร้าง Admin User
-python manage.py createsuperuser
-
-# 7. รันเซิร์ฟเวอร์
-python manage.py runserver
-```
-
-เปิดเบราว์เซอร์ไปที่: http://127.0.0.1:8000
-
----
-
-## 🚀 การ Deploy บน Render.com
-
-### ขั้นตอนที่ 1: Push ขึ้น GitHub
-
-```bash
-git init
-git add .
-git commit -m "Initial commit: Kamen Rider Database System"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/masrider-project.git
-git push -u origin main
-```
-
-### ขั้นตอนที่ 2: สร้าง PostgreSQL บน Render
-
-1. ไปที่ https://render.com → **New** → **PostgreSQL**
-2. ตั้งชื่อ: `masrider-db`
-3. กด **Create Database**
-4. คัดลอก **Internal Database URL**
-
-### ขั้นตอนที่ 3: Deploy Web Service
-
-1. **New** → **Web Service**
-2. เชื่อม GitHub repo ของคุณ
-3. ตั้งค่าดังนี้:
 
 | ฟิลด์ | ค่า |
 |-------|-----|
@@ -80,7 +22,7 @@ git push -u origin main
 | **Build Command** | `./build.sh` |
 | **Start Command** | `gunicorn masrider_project.wsgi:application` |
 
-4. เพิ่ม **Environment Variables**:
+
 
 | Key | Value |
 |-----|-------|
@@ -88,9 +30,9 @@ git push -u origin main
 | `DEBUG` | `False` |
 | `DATABASE_URL` | (วาง Internal Database URL) |
 
-5. กด **Create Web Service**
 
-### ขั้นตอนที่ 4: สร้าง Admin User บน Render
+
+ ขั้นตอนที่ 4: สร้าง Admin User บน Render
 
 ใน Render Dashboard → Shell:
 ```bash
@@ -99,7 +41,7 @@ python manage.py createsuperuser
 
 ---
 
-## 📁 โครงสร้างโปรเจค
+
 
 ```
 masrider-project/
@@ -124,7 +66,7 @@ masrider-project/
 
 ---
 
-## 🗄️ Database Schema
+ Database Schema
 
 ### MasRider
 | ฟิลด์ | ประเภท | คำอธิบาย |
@@ -157,7 +99,4 @@ masrider-project/
 
 ---
 
-## 🔗 Links
 
-- **GitHub**: https://github.com/YOUR_USERNAME/masrider-project
-- **Live Demo**: https://masrider-app.onrender.com
